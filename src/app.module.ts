@@ -6,8 +6,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { VideoModule } from './video/video.module';
 import { TrimCommandModule } from './trim-command/trim-command.module';
 import { ConcatCommandModule } from './concat-command/concat-command.module';
-import { ConcatInformationModule } from './concat-information/concat-information.module';
-import { FinalVideoModule } from './final-video/final-video.module';
 
 @Module({
   imports: [
@@ -22,8 +20,6 @@ import { FinalVideoModule } from './final-video/final-video.module';
     VideoModule,
     TrimCommandModule,
     ConcatCommandModule,
-    ConcatInformationModule,
-    FinalVideoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
