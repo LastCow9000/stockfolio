@@ -33,4 +33,26 @@ export class TrimCommandService {
     await this.trimCommandRepository.save(newTrimCommand);
     return { success: true };
   }
+
+  async getAllCommand(userId: number) {
+    const commands = await this.trimCommandRepository.find({
+      where: { video: { user: { id: userId } } },
+      relations: ['video'],
+    });
+
+    if (commands.length === 0) {
+      throw new NotFoundException('Trim 명령이 존재하지 않습니다');
+    }
+
+    return {
+      success: true,
+      data: commands.map((command) => ({
+        ...command,
+        video: {
+          id: command.video.id,
+          filePath: command.video.filePath,
+        },
+      })),
+    };
+  }
 }
