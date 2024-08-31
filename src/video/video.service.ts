@@ -22,7 +22,7 @@ export class VideoService {
     for (const file of files) {
       const newVideo = this.videoRepository.create({
         user,
-        filePath: `/${PUBLIC_ORIGINAL_VIDEO_PATH}${file.filename}`,
+        filePath: `/${join(PUBLIC_ORIGINAL_VIDEO_PATH, file.filename)}`,
         status: VIDEO.UPLOADED,
       });
 
