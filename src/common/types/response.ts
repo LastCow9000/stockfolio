@@ -7,3 +7,8 @@ export type UploadVideoResponse = {
   success: boolean;
   data: VideoReponse[];
 };
+
+export type OriginalVideoListResponse = {
+  success: boolean;
+  data: VideoReponse[];
+};

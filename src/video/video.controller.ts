@@ -9,14 +9,21 @@ import {
 } from '@nestjs/common';
 import { VideoService } from './video.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { UploadVideoResponse } from 'src/common/types/response';
+import {
+  OriginalVideoListResponse,
+  UploadVideoResponse,
+} from 'src/common/types/response';
 
 @Controller('api/v1/videos')
 export class VideoController {
   constructor(private readonly videoService: VideoService) {}
 
   @Get()
-  async getAllVideos(@Query('user_id') userId: number) {}
+  async getAllOriginalVideos(
+    @Query('user_id') userId: number,
+  ): Promise<OriginalVideoListResponse> {
+    return await this.videoService.getAllOriginalVideos(userId);
+  }
 
   @Get('/final-videos')
   async getAllFinalVideos(@Query('user_id') userId: number) {}

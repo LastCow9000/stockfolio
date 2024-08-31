@@ -38,4 +38,15 @@ export class VideoService {
       })),
     };
   }
+
+  async getAllOriginalVideos(userId: number) {
+    const videos = await this.videoRepository.find({
+      where: { user: { id: userId } },
+    });
+
+    return {
+      success: true,
+      data: videos.map((video) => ({ id: video.id, filePath: video.filePath })),
+    };
+  }
 }
