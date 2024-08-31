@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { VideoModule } from './video/video.module';
 import { TrimCommandModule } from './trim-command/trim-command.module';
 import { ConcatCommandModule } from './concat-command/concat-command.module';
+import { User } from './user/entities/user.entity';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ConcatCommandModule } from './concat-command/concat-command.module';
     VideoModule,
     TrimCommandModule,
     ConcatCommandModule,
+    TypeOrmModule.forFeature([User]),
   ],
   controllers: [AppController],
   providers: [AppService],
