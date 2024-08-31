@@ -29,3 +29,5 @@ export type TrimCommandType = Pick<
 export type AllCommandListReponse = SuccessType & {
   data: TrimCommandType[];
 };
+
+export type CreateConcatCommandResponse = SuccessType;
