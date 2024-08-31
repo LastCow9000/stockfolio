@@ -55,4 +55,57 @@ export class ConcatCommandService {
       return { success: true };
     });
   }
+
+  async getAllCommand(userId: number) {
+    const concatInformations = await this.conConcatInformationRepository.find({
+      where: {
+        video: {
+          user: { id: userId },
+        },
+      },
+      relations: ['concatCommand', 'video'],
+    });
+
+    const data = this.convertConcatCommand(concatInformations);
+
+    return {
+      success: true,
+      data,
+    };
+  }
+
+  private convertConcatCommand(concatInformations: ConcatInformation[]) {
+    const result = [];
+
+    const concatCommandIds = new Set(
+      concatInformations.map((info) => info.concatCommand.id),
+    );
+
+    concatCommandIds.forEach((id) => {
+      const concatCommandsById = concatInformations.filter(
+        (info) => info.concatCommand.id === id,
+      );
+      const convertedConcatInfo = concatCommandsById.map((info) => ({
+        order: info.order,
+        video: {
+          id: info.video.id,
+          filePath: info.video.filePath,
+        },
+      }));
+
+      const concatInfoById = concatInformations.find((info) => info.id === id);
+      const { status, createdAt } = concatInfoById.concatCommand;
+
+      const covertedConcatCommand = {
+        id,
+        status,
+        createdAt,
+        commandInfos: convertedConcatInfo,
+      };
+
+      result.push(covertedConcatCommand);
+    });
+
+    return result;
+  }
 }

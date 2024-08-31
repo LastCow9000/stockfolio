@@ -1,3 +1,5 @@
+import { ConcatCommand } from 'src/concat-command/entities/concat-command.entity';
+import { ConcatInformation } from 'src/concat-command/entities/concat-information.entity';
 import { TrimCommand } from 'src/trim-command/entities/trim-command.entity';
 
 export type SuccessType = {
@@ -26,8 +28,21 @@ export type TrimCommandType = Pick<
   video: VideoReponse;
 };
 
-export type AllCommandListReponse = SuccessType & {
+export type AllTrimCommandListReponse = SuccessType & {
   data: TrimCommandType[];
 };
 
 export type CreateConcatCommandResponse = SuccessType;
+
+export type ConcatCommandType = Pick<
+  ConcatCommand,
+  'id' | 'status' | 'createdAt'
+> & {
+  commandInfos: Pick<ConcatInformation, 'order'> & {
+    video: VideoReponse;
+  };
+};
+
+export type AllConcatCommandListResponse = SuccessType & {
+  data: ConcatCommandType[];
+};

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { TrimCommandService } from './trim-command.service';
 import { CreateTrimCommandDto } from './dto/create-trim-command.dto';
 import {
-  AllCommandListReponse,
+  AllTrimCommandListReponse,
   CreateTrimCommandResponse,
 } from 'src/common/types/response';
 
@@ -13,7 +13,7 @@ export class TrimCommandController {
   @Get()
   async getAllCommand(
     @Query('user_id') userId: number,
-  ): Promise<AllCommandListReponse> {
+  ): Promise<AllTrimCommandListReponse> {
     return await this.trimCommandService.getAllCommand(userId);
   }
 
