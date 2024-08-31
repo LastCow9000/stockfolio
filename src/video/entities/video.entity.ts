@@ -7,7 +7,7 @@ import {
   Entity,
 } from 'typeorm';
 import { VIDEO } from 'src/common/constants/status';
-import { VideoStatus } from 'src/common/types/type';
+import { VideoStatus } from 'src/common/types/status';
 
 @Entity()
 export class Video {

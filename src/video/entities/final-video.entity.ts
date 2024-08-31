@@ -1,5 +1,5 @@
 import { FINAL_VIDEO } from 'src/common/constants/status';
-import { FinalVideoStatus } from 'src/common/types/type';
+import { FinalVideoStatus } from 'src/common/types/status';
 import { ConcatCommand } from 'src/concat-command/entities/concat-command.entity';
 import { TrimCommand } from 'src/trim-command/entities/trim-command.entity';
 import {

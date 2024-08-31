@@ -1,5 +1,5 @@
 import { COMMAND } from 'src/common/constants/status';
-import { CommandStatus } from 'src/common/types/type';
+import { CommandStatus } from 'src/common/types/status';
 import { Video } from 'src/video/entities/video.entity';
 import {
   PrimaryGeneratedColumn,

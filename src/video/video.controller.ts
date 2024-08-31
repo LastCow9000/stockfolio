@@ -1,5 +1,15 @@
-import { Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UploadedFiles,
+  UseInterceptors,
+} from '@nestjs/common';
 import { VideoService } from './video.service';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { UploadVideoResponse } from 'src/common/types/response';
 
 @Controller('api/v1/videos')
 export class VideoController {
@@ -8,14 +18,20 @@ export class VideoController {
   @Get()
   async getAllVideos(@Query('user_id') userId: number) {}
 
-  @Get()
+  @Get('/final-videos')
   async getAllFinalVideos(@Query('user_id') userId: number) {}
 
   @Get('/:final_video_id/download')
   async getDownLoadLinkOfFinalVideo(@Param('final_video_id') id: number) {}
 
   @Post()
-  async upload(@Query('user_id') userId: number) {}
+  @UseInterceptors(FilesInterceptor('files'))
+  async upload(
+    @Query('user_id') userId: number,
+    @UploadedFiles() files: Array<Express.Multer.File>,
+  ): Promise<UploadVideoResponse> {
+    return await this.videoService.uploadVideo(userId, files);
+  }
 
   @Post('/execute')
   async executeCommand(@Query('user_id') userId: number) {}
