@@ -33,9 +33,6 @@ export class VideoController {
   @Get('/final-videos')
   async getAllFinalVideos(@Query('user_id') userId: number) {}
 
-  @Get('/:final_video_id/download')
-  async getDownLoadLinkOfFinalVideo(@Param('final_video_id') id: number) {}
-
   @Post()
   @UseInterceptors(FilesInterceptor('files'))
   async upload(

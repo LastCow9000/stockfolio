@@ -19,7 +19,7 @@ import * as ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
 import { promises } from 'fs';
 import { join } from 'path';
 import { CommandInfo, ConcatCommandType } from 'src/common/types/response';
-import { FinalVideo } from './entities/final-video.entity';
+import { FinalVideo } from 'src/final-video/entities/final-video.entity';
 
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 

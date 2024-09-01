@@ -3,7 +3,7 @@ import { VideoService } from './video.service';
 import { VideoController } from './video.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Video } from './entities/video.entity';
-import { FinalVideo } from './entities/final-video.entity';
+import { FinalVideo } from '../final-video/entities/final-video.entity';
 import { User } from 'src/user/entities/user.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { extname } from 'path';

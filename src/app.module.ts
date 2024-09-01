@@ -7,6 +7,7 @@ import { VideoModule } from './video/video.module';
 import { TrimCommandModule } from './trim-command/trim-command.module';
 import { ConcatCommandModule } from './concat-command/concat-command.module';
 import { User } from './user/entities/user.entity';
+import { FinalVideoModule } from './final-video/final-video.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { User } from './user/entities/user.entity';
     TrimCommandModule,
     ConcatCommandModule,
     TypeOrmModule.forFeature([User]),
+    FinalVideoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
