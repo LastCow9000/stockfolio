@@ -12,5 +12,6 @@ import { Video } from 'src/video/entities/video.entity';
   ],
   controllers: [ConcatCommandController],
   providers: [ConcatCommandService],
+  exports: [ConcatCommandService],
 })
 export class ConcatCommandModule {}

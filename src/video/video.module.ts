@@ -11,10 +11,22 @@ import { VIDEO_EXTENSIONS } from 'src/common/constants/status';
 import { diskStorage } from 'multer';
 import { ORIGINAL_VIDEO_PATH } from 'src/common/constants/path';
 import { uuid } from 'uuidv4';
+import { TrimCommand } from 'src/trim-command/entities/trim-command.entity';
+import { ConcatCommand } from 'src/concat-command/entities/concat-command.entity';
+import { ConcatInformation } from 'src/concat-command/entities/concat-information.entity';
+import VideoFacade from './video.facade';
+import { ConcatCommandModule } from 'src/concat-command/concat-command.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Video, FinalVideo, User]),
+    TypeOrmModule.forFeature([
+      Video,
+      FinalVideo,
+      User,
+      TrimCommand,
+      ConcatCommand,
+      ConcatInformation,
+    ]),
     MulterModule.register({
       fileFilter: (req, file, cb) => {
         const ext = extname(file.originalname);
@@ -37,8 +49,9 @@ import { uuid } from 'uuidv4';
         },
       }),
     }),
+    ConcatCommandModule,
   ],
   controllers: [VideoController],
-  providers: [VideoService],
+  providers: [VideoService, VideoFacade],
 })
 export class VideoModule {}

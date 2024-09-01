@@ -10,13 +10,18 @@ import {
 import { VideoService } from './video.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import {
+  ExecuteCommandResponse,
   OriginalVideoListResponse,
   UploadVideoResponse,
 } from 'src/common/types/response';
+import VideoFacade from './video.facade';
 
 @Controller('api/v1/videos')
 export class VideoController {
-  constructor(private readonly videoService: VideoService) {}
+  constructor(
+    private readonly videoService: VideoService,
+    private readonly videoFacade: VideoFacade,
+  ) {}
 
   @Get()
   async getAllOriginalVideos(
@@ -41,5 +46,9 @@ export class VideoController {
   }
 
   @Post('/execute')
-  async executeCommand(@Query('user_id') userId: number) {}
+  async executeCommand(
+    @Query('user_id') userId: number,
+  ): Promise<ExecuteCommandResponse> {
+    return this.videoFacade.executeCommands(userId);
+  }
 }

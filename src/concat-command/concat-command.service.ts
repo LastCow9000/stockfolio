@@ -6,6 +6,7 @@ import { ConcatInformation } from './entities/concat-information.entity';
 import { Video } from 'src/video/entities/video.entity';
 import { CreateConcatCommandDto } from './dto/create-concat-command.dto';
 import { COMMAND } from 'src/common/constants/status';
+import { ConcatCommandType } from 'src/common/types/response';
 
 @Injectable()
 export class ConcatCommandService {
@@ -74,7 +75,9 @@ export class ConcatCommandService {
     };
   }
 
-  private convertConcatCommand(concatInformations: ConcatInformation[]) {
+  convertConcatCommand(
+    concatInformations: ConcatInformation[],
+  ): ConcatCommandType[] {
     const result = [];
 
     const concatCommandIds = new Set(

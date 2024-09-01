@@ -34,15 +34,35 @@ export type AllTrimCommandListReponse = SuccessType & {
 
 export type CreateConcatCommandResponse = SuccessType;
 
-export type ConcatCommandType = Pick<
-  ConcatCommand,
-  'id' | 'status' | 'createdAt'
-> & {
-  commandInfos: Pick<ConcatInformation, 'order'> & {
-    video: VideoReponse;
-  };
+export type CommandInfo = Pick<ConcatInformation, 'order'> & {
+  video: VideoReponse;
+};
+
+export type ConcatCommandType = ConcatCommand & {
+  commandInfos: CommandInfo[];
 };
 
 export type AllConcatCommandListResponse = SuccessType & {
   data: ConcatCommandType[];
 };
+
+export type CommonExcuteCommand = {
+  success: boolean;
+  command: 'trim' | 'concat';
+  commandId: number;
+  filePath?: string;
+  reason?: string;
+};
+
+export type ExecuteTrimCommand = CommonExcuteCommand & {
+  originVideoId: number;
+};
+
+export type ExecuteConcatCommand = {
+  originVideoIds: number[];
+};
+
+export type ExecuteCommandResponse = (
+  | ExecuteTrimCommand
+  | ExecuteConcatCommand
+)[];
