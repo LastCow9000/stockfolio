@@ -16,6 +16,7 @@ import { ConcatCommand } from 'src/concat-command/entities/concat-command.entity
 import { ConcatInformation } from 'src/concat-command/entities/concat-information.entity';
 import VideoFacade from './video.facade';
 import { ConcatCommandModule } from 'src/concat-command/concat-command.module';
+import { BullModule } from '@nestjs/bull';
 
 @Module({
   imports: [
@@ -50,6 +51,9 @@ import { ConcatCommandModule } from 'src/concat-command/concat-command.module';
       }),
     }),
     ConcatCommandModule,
+    BullModule.registerQueue({
+      name: 'videoProcessing',
+    }),
   ],
   controllers: [VideoController],
   providers: [VideoService, VideoFacade],

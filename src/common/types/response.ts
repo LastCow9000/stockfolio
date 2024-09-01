@@ -63,10 +63,7 @@ export type ExecuteConcatCommand = {
   originVideoIds: number[];
 };
 
-export type ExecuteCommandResponse = (
-  | ExecuteTrimCommand
-  | ExecuteConcatCommand
-)[];
+export type ExecuteCommandResponse = SuccessType & { message: string };
 
 export type DownloadLinkResponse = SuccessType & { downloadLink: string };
 

@@ -8,6 +8,8 @@ import { TrimCommandModule } from './trim-command/trim-command.module';
 import { ConcatCommandModule } from './concat-command/concat-command.module';
 import { User } from './user/entities/user.entity';
 import { FinalVideoModule } from './final-video/final-video.module';
+import { BullModule } from '@nestjs/bull';
+import { VideoProcessingModule } from './video-processing/video-processing.module';
 
 @Module({
   imports: [
@@ -24,6 +26,13 @@ import { FinalVideoModule } from './final-video/final-video.module';
     ConcatCommandModule,
     TypeOrmModule.forFeature([User]),
     FinalVideoModule,
+    BullModule.forRoot({
+      redis: {
+        host: 'localhost',
+        port: 6379,
+      },
+    }),
+    VideoProcessingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

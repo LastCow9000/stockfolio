@@ -6,11 +6,13 @@ export const VIDEO = {
 export const COMMAND = {
   PENDING: 'pending',
   DONE: 'done',
+  FAIL: 'fail',
 } as const;
 
 export const FINAL_VIDEO = {
   PROCCESSING: 'processing',
   DONE: 'done',
+  FAIL: 'fail',
 } as const;
 
 export const VIDEO_EXTENSIONS = [

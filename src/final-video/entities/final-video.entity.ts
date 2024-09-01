@@ -16,8 +16,8 @@ export class FinalVideo {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
-  filePath: string;
+  @Column({ nullable: true })
+  filePath?: string;
 
   @Column({ enum: FINAL_VIDEO })
   status: FinalVideoStatus;
