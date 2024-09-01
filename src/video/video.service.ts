@@ -83,23 +83,25 @@ export class VideoService {
       relations: ['video'],
     });
 
-    const trimResults = await this.processTrim(trimCommands);
-    const concatResults = await this.processConcat(concatCommands);
+    const trimResults = await this.processTrim(userId, trimCommands);
+    const concatResults = await this.processConcat(userId, concatCommands);
 
     return trimResults.concat(concatResults);
   }
 
-  private async processTrim(trimCommands: TrimCommand[]) {
+  private async processTrim(userId: number, trimCommands: TrimCommand[]) {
     const result = [];
 
     for (const trimCommand of trimCommands) {
       const { id, video, startTime, endTime } = trimCommand;
       const { outputFileName, outputPath, publicOutputPath } =
         this.getOutputInfo('trim', video.filePath);
+
       const newFinalVideo = this.finalVideoRepository.create({
         filePath: publicOutputPath,
         trimCommand,
         status: FINAL_VIDEO.PROCCESSING,
+        user: { id: userId },
       });
       const savedFinalVideo =
         await this.finalVideoRepository.save(newFinalVideo);
@@ -146,17 +148,22 @@ export class VideoService {
     });
   }
 
-  private async processConcat(concatCommands: ConcatCommandType[]) {
+  private async processConcat(
+    userId: number,
+    concatCommands: ConcatCommandType[],
+  ) {
     const result = [];
 
     for (const concatCommand of concatCommands) {
       const { id, status, createdAt, commandInfos } = concatCommand;
       const { outputFileName, outputPath, publicOutputPath } =
         this.getOutputInfo('concat', commandInfos[0].video.filePath);
+
       const newFinalVideo = this.finalVideoRepository.create({
         filePath: publicOutputPath,
         concatCommand: { id, status, createdAt },
         status: FINAL_VIDEO.PROCCESSING,
+        user: { id: userId },
       });
       const savedFinalVideo =
         await this.finalVideoRepository.save(newFinalVideo);

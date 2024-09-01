@@ -30,9 +30,6 @@ export class VideoController {
     return await this.videoService.getAllOriginalVideos(userId);
   }
 
-  @Get('/final-videos')
-  async getAllFinalVideos(@Query('user_id') userId: number) {}
-
   @Post()
   @UseInterceptors(FilesInterceptor('files'))
   async upload(

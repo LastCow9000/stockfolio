@@ -1,6 +1,7 @@
 import { ConcatCommand } from 'src/concat-command/entities/concat-command.entity';
 import { ConcatInformation } from 'src/concat-command/entities/concat-information.entity';
 import { TrimCommand } from 'src/trim-command/entities/trim-command.entity';
+import { FinalVideoStatus } from './status';
 
 export type SuccessType = {
   success: boolean;
@@ -66,3 +67,24 @@ export type ExecuteCommandResponse = (
   | ExecuteTrimCommand
   | ExecuteConcatCommand
 )[];
+
+export type DownloadLinkResponse = SuccessType & { downloadLink: string };
+
+export type finalVideo = VideoReponse & {
+  status: FinalVideoStatus;
+  createdAt: Date;
+};
+
+export type FinalVideoTrim = finalVideo &
+  Pick<TrimCommand, 'id' | 'startTime' | 'endTime'>;
+
+export type FinalVideoConcat = finalVideo & {
+  concatCommandInfo: {
+    id: number;
+    originalVideos: { id: number; order: number; filePath: string }[];
+  };
+};
+
+export type AllFinalVideoListResponse = SuccessType & {
+  data: Partial<FinalVideoTrim | FinalVideoConcat>[];
+};
